@@ -14,7 +14,6 @@ class Arm:
 class Bandit:
     def __init__(self, arms, selection_algorithm):
         self.arms = arms
-        #here i need to use greedy, e-greedy or ucb
         self.selection_algorithm = selection_algorithm
         self.total_reward = 0.0
         self.pull_history = []
@@ -26,7 +25,7 @@ class Bandit:
 
     def pull_arm(self, step=None):
         arm_index = self.select_arm(step)
-        reward = self.arms[arm_index].pull()
+        reward = float(self.arms[arm_index].get_reward())  
         self.total_reward += reward
         self.pull_history.append((arm_index, reward))
         return arm_index, reward
@@ -34,8 +33,6 @@ class Bandit:
     def reset(self):
         self.total_reward = 0.0
         self.pull_history.clear()
-        for arm in self.arms:
-            arm.reset()
 
     def get_total_reward(self):
         return self.total_reward
@@ -54,5 +51,5 @@ class Bandit:
             if optimal_expected_value is not None:
                 cumulative_regret += (optimal_expected_value - reward)
                 regret.append(cumulative_regret)
-
+                
         return rewards, regret
