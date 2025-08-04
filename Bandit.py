@@ -14,9 +14,8 @@ class Arm:
 class Bandit:
     def __init__(self, arms, selection_algorithm):
         self.arms = arms
-        #not sure what this is i am using a medium article
-        #dusting
-        #PLEASEEEEEEEE lmfao
+       
+        #i need to use the e-greedy, greedy or UCB
         self.selection_algorithm = selection_algorithm
         self.total_reward = 0.0
         self.pull_history = []
@@ -43,9 +42,10 @@ class Bandit:
     def get_total_reward(self):
         return self.total_reward
     
-    def get_arm_stats(self):
+    def get_arm_stats(self): 
         return[
             {
+                #i need mean from arm class
                 'empirical_mean': arm.get_empirical_mean(),
                 'pull_count': arm.get_pull_count()
             }
@@ -53,4 +53,16 @@ class Bandit:
         ]
 
     def run(self, rounds, optimal_expected_value=None):
-        reward  =     
+        rewards  = []
+        regret = []
+        cumulative_reward = 0.0
+        cumulative_regret = 0.0
+        
+        for t in range(1, rounds+1):
+            _, reward = self.pull_arm(step = t)
+            cumulative_reward =  cumulative_reward + reward
+            rewards.append(cumulative_reward/t)
+            if optimal_expected_value is not None:
+                cumulative_regret = cumulative_regret + (optimal_expected_value - reward)
+                regret.append(cumulative_regret)
+        return rewards, regret
