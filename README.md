@@ -1,15 +1,8 @@
-# Homework-01
+# Contributors
 
-# Python virtual environment
-
-To activate the virtual environment, run the following command:
-
-```shell
-source venv/bin/activate
-```
-
-To deactivate the venv, just run:
-
-```shell
-deactivate
-```
+| Student Number | Name            |
+| -------------- | --------------- |
+| 2620515        | Taboka Dube     |
+| 2541693        | Wendy Maboa     |
+| 2596852        | Liam Brady      |
+| 2333776        | Refiloe Mopeloa |
